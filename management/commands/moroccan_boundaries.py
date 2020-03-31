@@ -27,8 +27,10 @@ class Command(BaseCommand):
         if not os.path.exists(self.TEMP_DIR):
             self.tell('creating %s for temp usage' % self.TEMP_DIR)
             os.makedirs(self.TEMP_DIR)
+        self.tell('-1 unknown means the app doesnot know the size of the source ')
         for key in self.TERRITORY_MODEL.keys():
             self.load_territory(key)
+
         self.load_places()
         self.tell('DONE!')
         self.final_clean()
@@ -75,7 +77,7 @@ class Command(BaseCommand):
     }
 
     def file_download(self, territory):
-        self.tell('Downloading %s' % territory)
+        self.stdout.write(self.style.SUCCESS("Downloading " + territory))
         sleep(0.2)
         target = self.FILES_URI[territory]
         url = target['filelink']  # big file test
@@ -153,7 +155,7 @@ class Command(BaseCommand):
                 try:
                     parent = self.TERRITORY_PARENT[territory].objects.filter(shape__contains=center_geometry)[0]
                     creation_params.update({self.T_P_KEY[territory]: parent})
-                except:
+                except Exception:
                     parent = self.TERRITORY_PARENT[territory].objects.filter(shape__contains=ft_geometry)[0]
                     creation_params.update({self.T_P_KEY[territory]: parent})
 
@@ -179,6 +181,7 @@ class Command(BaseCommand):
             place_obj = Place.objects.create(osm_id=ft_id,
                                              name=ft_name,
                                              place_type=ft_place,
+                                             wikidata=ft_properties.get('wikidata', None),
                                              commune=parent,
                                              point=ft_geometry,
                                              )

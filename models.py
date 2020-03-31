@@ -23,6 +23,9 @@ class BaseLocation(TimestampedModel):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return self.name
+
 
 class BasePoint(BaseLocation):
     point = models.PointField()
