@@ -17,7 +17,7 @@ wget
 
 `MAPPING_FILES_URI = {
     'country':{'filename':"morocco.geojson",
-              'filelink':""},
+              'filelink':"https://gdurl.com/Ap2w"},
     'region':{'filename':"regions.geojson",
               'filelink':"https://gdurl.com/Te8W"},
     'wilaya':{'filename':"wilayas.geojson",
