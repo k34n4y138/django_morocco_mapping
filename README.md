@@ -1,5 +1,5 @@
 
-# django_morocco_mapping
+# django_morocco_mapping V0.1
 
 this app offers Administrative Boundaries splitting of the Moroccan Kingdom. 
 data has been mined through http://overpass-turbo.eu/ and fixed (some polygons were corrupted).
