@@ -1,22 +1,21 @@
+
 # django_morocco_mapping
 
 this app offers Administrative Boundaries splitting of the Moroccan Kingdom. 
-
 data has been mined through http://overpass-turbo.eu/ and fixed (some polygons were corrupted).
 
-
-requirements to install using pip: 
+# requirements to install using pip: 
 tqdm
 wget
 
-Add the following variables to your settings file:
-regions= الجهات
-wilayas=الأقاليم أو العمالة 
-subregion= الباشوية أو الدائرة 
-commune= الجماعة الحضارية أو القروية 
-place=   مدينة أو قرية أو ضاحية أو بلدة أو بلدية 
-place is in the form of point unfortunately 
-MAPPING_FILES_URI = {
+# Add the following variables to your settings file:
+'INSTALLED_APPS=[
+...
+'morocco_mapping'
+...
+]'
+
+`MAPPING_FILES_URI = {
     'country':{'filename':"morocco.geojson",
               'filelink':""},
     'region':{'filename':"regions.geojson",
@@ -28,12 +27,20 @@ MAPPING_FILES_URI = {
     'commune':{'filename':"communes.geojson",
                 'filelink':"https://gdurl.com/GWNl"},
     'place':{'filename':"places.geojson",
-             'filelink':"https://gdurl.com/TLYg"},
-}
-replace /// with the dict {'filename':FILENAME,'filelink':DIRECT_LINK_TO_FILE}
-######################
-a directory to use temporarily for downloading files
-MAPPING_TEMP_DIR = '/var/tmp'
+             'filelink':"https://gdurl.com/TLYg"}
+}`
+<br/>
+#### a directory to use temporarily for downloading files
+`MAPPING_TEMP_DIR = '/var/tmp`
+<br/>
+#### localies for alternative names assignement
+`MAPPING_LOCALIES = ['en', 'ar', 'fr']`
 
-localies for alternative names assignement
-MAPPING_LOCALIES = ['en', 'ar', 'fr']
+# Initiation:
+after making sure the settings above are all set 
+open the terminal at your project directory and execute the following:
+`python manage.py migrate morocco_mapping`
+
+#### db population:
+make sure the files above are pointing to the right files and none is missing 
+`python manage.py morocco_mapping`
