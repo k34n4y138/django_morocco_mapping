@@ -44,3 +44,7 @@ open the terminal at your project directory and execute the following:
 #### db population:
 make sure the files above are pointing to the right files and none is missing 
 `python manage.py morocco_mapping`
+
+
+## TODOS:
+-add serializers and APIViews so to allow external retrievement
